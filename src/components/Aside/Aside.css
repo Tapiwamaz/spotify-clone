@@ -1,0 +1,145 @@
+.aside {
+  flex: 0.3;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  flex: 0.25;
+  margin:  var(--xs) var(--sm);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--darkLightdark);
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  width: max-content;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.navButton:visited {
+  color: var(--textInactive);
+}
+.navButton:active,
+.navButton:hover,
+.controls .icon {
+  color: var(--text);
+}
+
+.linkText {
+  font-size: var(--sm);
+}
+
+.icon {
+  width: var(--lg);
+  margin: var(--xs);
+  cursor: pointer;
+}
+
+.profiles {
+  flex: 1;
+  margin:  var(--xs) var(--sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  flex: 0.1;
+  justify-content: space-between;
+  position: relative;
+}
+
+.controls .icon {
+  width: var(--sm);
+  color: var(--textInactive);
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+}
+
+.controls .icon:hover {
+  color: var(--text);
+}
+
+.collapseHolder {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.collapseHolder::before {
+    content: "Collapse Your Library";
+    position: absolute;
+    bottom: 4.0rem;
+    color: var(--text);
+    border: 1px solid var(--darkLight);
+    background-color: var(--darkLight);
+    border-radius: 3px;
+    padding: 3px;
+    opacity: 0;
+    transition: opacity ease-in-out 0.25s; ;
+}
+
+.collapseHolder:hover > .icon, .collapseHolder:hover > .label {
+    color: var(--text);
+}
+
+.collapseHolder:hover::before  {
+    opacity: 1;
+}
+
+.label {
+    font-size: var(--sm);
+    font-weight: bold;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.profilesModifiers {
+   list-style: none;
+   display: flex;
+}
+.plus {
+    position: relative;
+}
+
+.plus::before  {
+    content: "Create a playlist";
+    position: absolute;
+    width: max-content;
+    bottom: 4.0rem;
+    color: var(--text);
+    border: 1px solid var(--darkLight);
+    background-color: var(--darkLight);
+    border-radius: 3px;
+    padding: 3px;
+    opacity: 0;
+    transition: opacity ease-in-out 0.3s; ;
+}
+.plus:hover::before  {
+    opacity: 1;
+}
+
+.arrow::before  {
+    content: "Expand";
+    position: absolute;
+    width: max-content;
+    bottom: 4.0rem;
+    color: var(--text);
+    border: 1px solid var(--darkLight);
+    background-color: var(--darkLight);
+    border-radius: 3px;
+    padding: 3px;
+    opacity: 0;
+    transition: opacity ease-in-out 0.3s; ;
+}
+.arrow:hover::before  {
+    opacity: 1;
+}
+
+
+
+
+

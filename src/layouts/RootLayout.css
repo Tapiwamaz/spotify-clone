@@ -1,0 +1,10 @@
+.rootLayout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border: 3px solid rgb(238, 233, 233);
+}
+.topSection {
+    display: flex;
+    flex: 1;
+}

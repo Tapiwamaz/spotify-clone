@@ -1,0 +1,42 @@
+/* NoPodcast.js doesnt have a css file because both 
+pages have elements with same classnames  */
+
+.promptCard {
+display: flex;
+flex-direction: column;
+border-radius: 0.5rem;
+background-color: var(--darkLightdark);
+margin: 0 0 var(--xs) 0 ;
+}
+
+.promptCard:hover {
+    background-color: var(--darkLight);
+}
+
+
+.promptCard > * {
+    margin: 0.8rem var(--sm);
+    transition: all ease-in-out 0.3s;
+}
+.promptCard p {
+    margin: 0.25rem var(--sm) var(--xs) var(--sm);
+ }
+
+button {
+    font: inherit;
+    padding: 0.5rem var(--sm);
+    border: none;
+    width: max-content;
+    background-color: var(--textInactive);
+    border-radius: var(--sm);
+    cursor: pointer;
+  
+}
+
+button:hover {
+    background-color: var(--text);
+    transform: scale(1.03);
+}
+
+
+
