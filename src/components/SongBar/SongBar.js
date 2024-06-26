@@ -1,6 +1,6 @@
 import "./SongBar.css";
 import songPic from "../../assets/Alfredo.jpg";
-import ShuffleIcon from "../../assets/Shuffle.svg";
+import { HeadphoneIcon, PlayIcon, ShuffleIcon } from "../../assets/icons/icons";
 
 const SongBar = () => {
   return (
@@ -17,21 +17,27 @@ const SongBar = () => {
             <li>
               <h5 className="songArtist">Alchemist</h5>
             </li>
-          
           </ul>
         </article>
       </section>
       <section className="songModifiers">
         <section className="modifiers">
-          <svg className="icon shuffle"/>
-          <svg className="icon previous"/>
-          <svg className="icon play"/>
-          <svg className="icon next"/>
-          <svg className="icon repeat"/>
-          </section>
-          <section className="timeBar"></section>
+          <svg className="icon shuffle" />
+          <ShuffleIcon/>
+          <svg className="icon previous" />
+          <svg className="icon play" />
+          <svg className="icon next" />
+          <svg className="icon repeat" />
+        </section>
+        <section className="timeBar"></section>
       </section>
-      <section className="songControls"></section>
+      <section className="songControls">
+        <PlayIcon/>
+        <HeadphoneIcon/>
+        <svg className="icon repeat" />
+        <svg className="icon repeat" />
+        <svg className="icon repeat" />
+      </section>
     </footer>
   );
 };

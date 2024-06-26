@@ -12,7 +12,6 @@ footer > section {
 
 .songDescription {
   display: flex;
-
   flex: 0.2;
 }
 .songModifiers {
@@ -81,43 +80,33 @@ footer > section {
   align-items: center;
 }
 .modifiers > svg:hover {
-  background-color: var(--text);
+  color: var(--text);
 }
 .modifiers > svg {
   margin: 0 0.5rem;
+  border: 1px saddlebrown solid;
 }
 
 .timeBar {
   flex: 1;
 }
 
-.shuffle,
-.previous,
-.next,
-.repeat,
-.play {
+
+/* SongModifiers */
+/* --------------------------------------------------------------------- */
+/* SongControls */
+
+.songControls {
+  display: flex;
+  border: 3px solid rgba(100, 100, 200);
+}
+.songControls > *:hover {
+  color: var(--text);
+}
+.headphone
+{
   height: 3.7vh;
   background-color: var(--textInactive);
 }
-.play {
-  height: 4.5vh;
-}
 
-.shuffle {
-  mask: url("../../assets/Shuffle.svg") no-repeat;
-}
-.play {
-  mask: url("../../assets/play.svg") no-repeat;
-}
 
-.previous {
-  mask: url("../../assets/previous.svg") no-repeat;
-}
-
-.repeat {
-  mask: url("../../assets/repeat.svg") no-repeat;
-}
-
-.next {
-  mask: url("../../assets/next.svg") no-repeat;
-}
