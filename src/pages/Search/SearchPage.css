@@ -1,0 +1,113 @@
+.searchPage {
+  flex-direction: column;
+  max-width: 71vw;
+  max-height: 85vh;
+  min-height: 85vh;
+  min-width: 71vw;
+  margin: var(--xs);
+
+  margin-bottom: 0;
+  position: relative;
+
+  overflow-y: auto;
+  background-color: var(--darkLightdark);
+}
+.searchPage::-webkit-scrollbar-thumb,
+.searchPage::-webkit-scrollbar-track,
+.searchPage::-webkit-scrollbar {
+  width: 10px;
+}
+
+.topNav {
+  display: flex;
+  justify-content: space-between;
+  height: min-content;
+  /* border: 1px solid sandybrown; */
+  padding: 0 var(--sm);
+  position: relative;
+}
+
+.topNav section {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  gap: var(--xs);
+}
+.topNav a {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  color: var(--text);
+  border-radius: 50%;
+  background-color: var(--dark);
+  align-items: center;
+  justify-content: center;
+}
+
+.topNav section a > svg {
+  display: flex;
+  margin: 0;
+}
+.topNav section button {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
+  color: var(--textInactive);
+  /* transition: all 1ms ease-in-out; */
+}
+.topNav section button > svg {
+  margin: 0;
+  background-color: var(--dark);
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 1ms ease-in-out;
+}
+
+.topNav section button > svg:hover {
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+.searchPage > * {
+  margin: var(--xs);
+}
+
+.searchFieldHolder {
+  display: flex;
+  border: 2px solid var(--darkLight);
+  border-radius: var(--sm);
+}
+.searchFieldHolder:hover  {
+  color: var(--text);
+  outline: 2px solid var(--text);
+  background-color:  var(--darkLight);
+}
+.searchFieldHolder:hover > .searchInput {
+  background-color:  var(--darkLight);
+}
+.noMargin {
+  margin: 0;
+}
+.searchFieldHolder .icon {
+  margin: var(--xs)  0 var(--xs) var(--xs) ;
+}
+
+
+
+.searchInput {
+  border: none;
+  font: inherit;
+  padding: 0 var(--xs);
+  width: 25vw;
+  border-radius: inherit;
+  background-color: var(--darkLightdark);
+  color: var(--text);
+}
+.searchInput:focus {
+  border: none;
+  outline: none;
+}
+

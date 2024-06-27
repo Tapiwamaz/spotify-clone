@@ -22,7 +22,7 @@ margin: 0 0 var(--xs) 0 ;
     margin: 0.25rem var(--sm) var(--xs) var(--sm);
  }
 
-button {
+.button {
     font: inherit;
     padding: 0.5rem var(--sm);
     border: none;
@@ -33,7 +33,7 @@ button {
   
 }
 
-button:hover {
+.button:hover {
     background-color: var(--text);
     transform: scale(1.03);
 }

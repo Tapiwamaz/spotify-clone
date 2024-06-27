@@ -3,31 +3,37 @@ import "./Aside.css";
 // icons
 import {
   ArrowRightIcon,
-  ChevronDoubleDownIcon,
   MagnifyingGlassIcon,
   PlusIcon,
-  HomeIcon,
 } from "@heroicons/react/24/outline";
+import {HomeIcon, LibraryIcon,HomeOutlineIcon,MagnifyingGlassFilledIcon} from "../../assets/icons/icons"
+
+
 import NoPlaylist from "./NoPlaylist";
 import NoPodcast from "./NoPodcast";
+import { useLocation} from "react-router";
+import {  NavLink} from "react-router-dom"
 
 const Aside = () => {
+
+  const location = useLocation();
+
   return (
     <aside className="aside">
       <nav className="nav">
-        <a className="navButton" href="/">
-          <HomeIcon className="icon" />
+        <NavLink className="navButton" to="/"  >
+          {location.pathname === "/" ?  <HomeIcon className="icon" /> : <HomeOutlineIcon className="icon" />}
           <h3 className="linkText">Home</h3>
-        </a>
-        <a className="navButton" href="/">
-          <MagnifyingGlassIcon className="icon" />
+        </NavLink>
+        <NavLink className="navButton" to="/search">
+          {location.pathname === "/search" ? <MagnifyingGlassFilledIcon className="icon" /> : <MagnifyingGlassIcon className="icon" />}
           <h3 className="linkText">Search</h3>
-        </a>
+        </NavLink>
       </nav>
       <section className="profiles">
         <nav className="controls">
           <section className="collapseHolder">
-            <ChevronDoubleDownIcon className="icon collapse" />
+            <LibraryIcon className="icon collapse" />
             <label className="label">Your Library</label>
           </section>
           <ul className="profilesModifiers">

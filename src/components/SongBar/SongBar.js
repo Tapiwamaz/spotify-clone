@@ -1,6 +1,24 @@
+//css
 import "./SongBar.css";
+//pictures
 import songPic from "../../assets/Alfredo.jpg";
-import { HeadphoneIcon, PlayIcon, ShuffleIcon } from "../../assets/icons/icons";
+//icons
+import {
+  FullScreenIcon,
+  HeadphoneIcon,
+  MiniPlayerIcon,
+  NextIcon,
+  OtherDevicesIcon,
+  PlayIcon,
+  PreviousIcon,
+  QueueIcon,
+  RepeatIcon,
+  ShuffleIcon,
+  VolumeIcon,
+} from "../../assets/icons/icons";
+
+//songs
+import { songs } from "../../assets/music";
 
 const SongBar = () => {
   return (
@@ -22,21 +40,29 @@ const SongBar = () => {
       </section>
       <section className="songModifiers">
         <section className="modifiers">
-          <svg className="icon shuffle" />
-          <ShuffleIcon/>
-          <svg className="icon previous" />
-          <svg className="icon play" />
-          <svg className="icon next" />
-          <svg className="icon repeat" />
+          <ShuffleIcon />
+          <PreviousIcon />
+          <PlayIcon />
+          <NextIcon />
+          <RepeatIcon />
         </section>
-        <section className="timeBar"></section>
+        <section className="timeBar">
+          <p className="time">1:06</p>
+          <hr className="bar"></hr>
+          <p className="time">1:06</p>
+          <audio controls>
+            <source src={songs[0]} type="audio/mpeg"></source>
+          </audio>
+        </section>
       </section>
       <section className="songControls">
-        <PlayIcon/>
-        <HeadphoneIcon/>
-        <svg className="icon repeat" />
-        <svg className="icon repeat" />
-        <svg className="icon repeat" />
+        <OtherDevicesIcon />
+        <QueueIcon />
+        <HeadphoneIcon />
+        <VolumeIcon />
+        <hr className="bar" />
+        <MiniPlayerIcon />
+        <FullScreenIcon />
       </section>
     </footer>
   );

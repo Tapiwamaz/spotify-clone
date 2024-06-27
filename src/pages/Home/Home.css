@@ -1,7 +1,141 @@
 .homepage {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid red;
-    margin: var(--xs);
-    flex: 0.7;
+  flex-direction: column;
+  max-width: 71vw;
+  max-height: 85vh;
+  min-height: 85vh;
+  min-width: 71vw;
+  margin: var(--xs);
+
+  margin-bottom: 0;
+
+  overflow-y: auto;
+  background-color: var(--darkLightdark);
+}
+.homepage::-webkit-scrollbar-thumb,
+.homepage::-webkit-scrollbar-track,
+.homepage::-webkit-scrollbar {
+  width: 10px;
+}
+
+.topNav {
+  display: flex;
+  justify-content: space-between;
+  height: min-content;
+  /* border: 1px solid sandybrown; */
+  padding: 0 var(--sm);
+}
+
+.topNav section {
+  /* border: 1px solid red; */
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  gap: var(--xs);
+}
+.topNav a {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  color: var(--text);
+  border-radius: 50%;
+  background-color: var(--dark);
+  align-items: center;
+  justify-content: center;
+}
+
+.topNav section a > svg {
+  display: flex;
+  margin: 0;
+}
+.topNav section button {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
+  color: var(--textInactive);
+  /* transition: all 1ms ease-in-out; */
+}
+.topNav section button > svg {
+  margin: 0;
+  background-color: var(--dark);
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 1ms ease-in-out;
+}
+
+.topNav section button > svg:hover {
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+.homepage > * {
+  margin: var(--xs);
+}
+
+.pageNav {
+  display: flex;
+  gap: var(--xs);
+  /* border: 1px solid sandybrown; */
+}
+
+.pageNav  button {
+  background-color: var(--text);
+  border: none;
+  border-radius: var(--sm);
+  font-weight: bold;
+  padding: 10px 1rem;
+  transition: all 1ms ease-in-out;
+  transform: none;
+}
+
+
+.cardHolder {
+  display: flex;
+  max-height: 250px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  gap: var(--xs);
+  padding-right: var(--xs);
+}
+.cardHolder::-webkit-scrollbar,
+.cardHolder::-webkit-scrollbar-thumb,
+.cardHolder::-webkit-scrollbar-thumb {
+  background-color: var(--dark);
+  height: 0;
+}
+.album {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding: 6px 10px;
+  min-width: 170px;
+  border-radius: var(--xs);
+  overflow: hidden;
+}
+.album:hover {
+  background-color: var(--darkLight);
+}
+
+.albumPic {
+  width: 150px;
+  height: 150px;
+  border-radius: 9px;
+}
+.albumTitle {
+  font-size: 0.95rem;
+  margin: 1px 0;
+}
+.albumDesc {
+  font-weight: normal;
+  text-align: left;
+  font-size: 10.5px;
+  line-height: 13px;
+}
+
+.inactive {
+  background-color: var(--darkLight);
 }

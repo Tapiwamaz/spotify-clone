@@ -4,16 +4,17 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  transition: all 10ms ease-in-out;  
 }
 
 :root {
   /* Colours */
-  --dark: #1a1a1a;
-  --darkLightdark: #1f1f1f;
-  --darkLight: #2b2b2b;
+  --dark: #0f0f0f;
+  --darkLightdark: #1d1d1d;
+  --darkLight: #2f2f2f;
   --green: #82b018;
   --text: #f6f6f6;
-  --textInactive: #b6b6b6;
+  --textInactive: #b9b9b9;
 
   /* sizing */
   --xs: 1rem;
