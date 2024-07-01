@@ -37,6 +37,7 @@
 
 .icon {
   width: var(--md);
+  height: var(--md);
   margin: var(--xs);
   cursor: pointer;
 }

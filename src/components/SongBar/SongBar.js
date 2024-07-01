@@ -16,43 +16,65 @@ import {
   ShuffleIcon,
   VolumeIcon,
 } from "../../assets/icons/icons";
-
-//songs
-import { songs } from "../../assets/music";
+//react
+import { useContext } from "react";
+//context
+import { PlayerContext } from "../../context/PlayerContext";
+//icons
+import { PauseCircleIcon } from "@heroicons/react/24/solid";
 
 const SongBar = () => {
+  const { time, seekBar, seekBg, playingStatus, play, pause, track, next, previous } =
+    useContext(PlayerContext);
+
   return (
     <footer>
       <section className="songDescription">
-        <img className="songPic" src={songPic} />
+        {track.albumArtUrl ? (
+          <img className="songPic" src={track.albumArtUrl} />
+        ) : (
+          <img className="songPic" src={songPic} />
+        )}
+
         <article className="songDetails">
-          <h4 className="songName">Skinny suge</h4>
+          <h4 className="songName">{track.title}</h4>
           <ul className="songArtists">
             <li>
-              <h5 className="songArtist">Freddy Gibbs</h5>
-            </li>
-            <li className="comma">,</li>
-            <li>
-              <h5 className="songArtist">Alchemist</h5>
+              <h5 className="songArtist">{track.artist}</h5>
             </li>
           </ul>
         </article>
       </section>
       <section className="songModifiers">
         <section className="modifiers">
-          <ShuffleIcon />
-          <PreviousIcon />
-          <PlayIcon />
-          <NextIcon />
-          <RepeatIcon />
+          <svg className="icon">
+            <ShuffleIcon />
+          </svg>
+          <svg className="icon" onClick={previous}>
+            <PreviousIcon />
+          </svg>
+          {!playingStatus ? (
+            <svg className="icon" onClick={play}>
+              <PlayIcon />
+            </svg>
+          ) : (
+            <svg className="icon" onClick={pause}>
+              <PauseCircleIcon className="icon" />
+            </svg>
+          )}
+          <svg className="icon" onClick={next}>
+            <NextIcon />
+          </svg>
+          <svg className="icon">
+            <RepeatIcon />
+          </svg>
         </section>
         <section className="timeBar">
-          <p className="time">1:06</p>
-          <hr className="bar"></hr>
-          <p className="time">1:06</p>
-          <audio controls>
-            <source src={songs[0]} type="audio/mpeg"></source>
-          </audio>
+          <p className="time">{time.currentTime.minute}:{time.currentTime.second}</p>
+          <div ref={seekBg} className="bar background">
+            <hr ref={seekBar} className="bar songBar"></hr>
+          </div>
+          <p className="time">{time.totalTime.minute}:{time.totalTime.second}</p>
         </section>
       </section>
       <section className="songControls">
@@ -60,7 +82,7 @@ const SongBar = () => {
         <QueueIcon />
         <HeadphoneIcon />
         <VolumeIcon />
-        <hr className="bar" />
+        <hr className="bar volumeBar" />
         <MiniPlayerIcon />
         <FullScreenIcon />
       </section>

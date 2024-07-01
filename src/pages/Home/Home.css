@@ -4,6 +4,7 @@
   max-height: 85vh;
   min-height: 85vh;
   min-width: 71vw;
+  border-radius:  var(--xs) var(--xs) 0 0 ;
   margin: var(--xs);
 
   margin-bottom: 0;

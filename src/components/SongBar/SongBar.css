@@ -1,3 +1,5 @@
+
+/* ------------------------------------------  */
 footer {
   height: 11vh;
   display: flex;
@@ -95,22 +97,38 @@ footer > section {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: var(--xs);
   justify-content: center;
-  /* border: 1px solid var(--text); */
+  gap: var(--xs);
+
 }
 .bar {
   flex: 0.8;
-  height: 3px;
+  height: 4px;
   border: none;
   border-radius: 5px;
   background-color: var(--textInactive);
+  cursor: pointer;
 }
 
-.bar:hover {
-  height: 4px;
+.songBar:hover {
+  height: 5px;
   background-color: var(--text);
 }
+.volumeBar:hover {
+  height: 5px;
+  translate: (1,2);
+  background-color: var(--text);
+}
+
+.songBar {
+  width: 50%;
+  border-radius: 5px 0 0 5px ;
+  background-color: var(--text);
+}
+.background {
+  background-color: grey;
+}
+
 
 
 
