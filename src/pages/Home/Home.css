@@ -1,15 +1,15 @@
 .homepage {
   flex-direction: column;
+  display: flex;
   max-width: 71vw;
   max-height: 85vh;
   min-height: 85vh;
   min-width: 71vw;
-  border-radius:  var(--xs) var(--xs) 0 0 ;
+  border-radius: var(--xs) var(--xs) 0 0;
   margin: var(--xs);
-
   margin-bottom: 0;
-
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--darkLightdark);
 }
 .homepage::-webkit-scrollbar-thumb,
@@ -22,12 +22,10 @@
   display: flex;
   justify-content: space-between;
   height: min-content;
-  /* border: 1px solid sandybrown; */
   padding: 0 var(--sm);
 }
 
 .topNav section {
-  /* border: 1px solid red; */
   display: flex;
   padding: 0;
   justify-content: center;
@@ -54,7 +52,6 @@
   padding: 0;
   background-color: transparent;
   color: var(--textInactive);
-  /* transition: all 1ms ease-in-out; */
 }
 .topNav section button > svg {
   margin: 0;
@@ -81,7 +78,7 @@
   /* border: 1px solid sandybrown; */
 }
 
-.pageNav  button {
+.pageNav button {
   background-color: var(--text);
   border: none;
   border-radius: var(--sm);
@@ -91,15 +88,11 @@
   transform: none;
 }
 
-
 .cardHolder {
-  display: flex;
-  max-height: 250px;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
   scroll-behavior: smooth;
-  gap: var(--xs);
+  gap: var(--sm);
   padding-right: var(--xs);
 }
 .cardHolder::-webkit-scrollbar,
@@ -114,8 +107,11 @@
   justify-items: center;
   padding: 6px 10px;
   min-width: 170px;
+  min-height: 250px;
   border-radius: var(--xs);
-  overflow: hidden;
+}
+.songCard {
+  cursor: pointer;
 }
 .album:hover {
   background-color: var(--darkLight);

@@ -8,3 +8,47 @@
   display: flex;
   flex: 1;
 }
+
+.loader {
+  width: 80px;
+  max-height: 80px;
+  align-self: center;
+  justify-self: center;
+
+  border: 10px solid #000;
+  box-sizing: border-box;
+  background: 
+    radial-gradient(farthest-side,#fff 98%,#0000) top,
+    radial-gradient(farthest-side,#fff 98%,#0000) top,
+    radial-gradient(farthest-side,#fff 98%,#0000) left,
+    radial-gradient(farthest-side,#fff 98%,#0000) right,
+    radial-gradient(farthest-side,#fff 98%,#0000) bottom,
+    #000;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  filter: blur(4px) contrast(10); 
+  animation: l19 2s infinite;
+}
+@keyframes l19 {
+  0%   {background-position:top,top,left,right,bottom}
+  25%  {background-position:right,top,left,right,bottom}
+  50%  {background-position:bottom,top,left,right,bottom}
+  75%  {background-position:left,top,left,right,bottom}
+  100% {background-position:top,top,left,right,bottom}
+}
+
+/* HTML: <div class="loader"></div> */
+.loader2 {
+  width: fit-content;
+  align-self: center;
+  justify-self: center;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  clip-path: inset(0 3ch 0 0);
+  animation: l4 1s steps(4) infinite;
+}
+.loader2:before {
+  content:"Loading..."
+}
+@keyframes l4 {to{clip-path: inset(0 -1ch 0 0)}}

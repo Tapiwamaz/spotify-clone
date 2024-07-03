@@ -1,7 +1,7 @@
 //css
 import "./SongBar.css";
 //pictures
-import songPic from "../../assets/Alfredo.jpg";
+import StockPicture from "../../assets/StockMusic.jpg";
 //icons
 import {
   FullScreenIcon,
@@ -24,8 +24,21 @@ import { PlayerContext } from "../../context/PlayerContext";
 import { PauseCircleIcon } from "@heroicons/react/24/solid";
 
 const SongBar = () => {
-  const { time, seekBar, seekBg, playingStatus, play, pause, track, next, previous } =
-    useContext(PlayerContext);
+  const {
+    time,
+    seekBar,
+    seekBg,
+    playingStatus,
+    play,
+    pause,
+    track,
+    next,
+    previous,
+    repeat,
+    setRepeat,
+    setShuffle,
+    shuffle,
+  } = useContext(PlayerContext);
 
   return (
     <footer>
@@ -33,7 +46,7 @@ const SongBar = () => {
         {track.albumArtUrl ? (
           <img className="songPic" src={track.albumArtUrl} />
         ) : (
-          <img className="songPic" src={songPic} />
+          <img className="songPic" src={StockPicture} />
         )}
 
         <article className="songDetails">
@@ -47,7 +60,10 @@ const SongBar = () => {
       </section>
       <section className="songModifiers">
         <section className="modifiers">
-          <svg className="icon">
+          <svg
+            className={`icon ${shuffle ? "green" : ""}`}
+            onClick={() => setShuffle((s) => !s)}
+          >
             <ShuffleIcon />
           </svg>
           <svg className="icon" onClick={previous}>
@@ -65,16 +81,23 @@ const SongBar = () => {
           <svg className="icon" onClick={next}>
             <NextIcon />
           </svg>
-          <svg className="icon">
+          <svg 
+          className={`icon ${repeat ? "green" : ""}`}
+          onClick={() => setRepeat(r => !r)}
+          >
             <RepeatIcon />
           </svg>
         </section>
         <section className="timeBar">
-          <p className="time">{time.currentTime.minute}:{time.currentTime.second}</p>
+          <p className="time">
+            {time.currentTime.minute}:{time.currentTime.second}
+          </p>
           <div ref={seekBg} className="bar background">
             <hr ref={seekBar} className="bar songBar"></hr>
           </div>
-          <p className="time">{time.totalTime.minute}:{time.totalTime.second}</p>
+          <p className="time">
+            {time.totalTime.minute}:{time.totalTime.second}
+          </p>
         </section>
       </section>
       <section className="songControls">

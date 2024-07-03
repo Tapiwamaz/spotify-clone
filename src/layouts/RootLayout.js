@@ -11,14 +11,20 @@ import { useContext } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 
 const RootLayout = () => {
-  const { audioRef, track } = useContext(PlayerContext);
- 
+  const { audioRef, track, firstLoad } = useContext(PlayerContext);
 
   return (
     <main className="rootLayout">
       <section className="topSection">
         <Aside></Aside>
-        <Outlet />
+        {firstLoad ? (
+          <Outlet />
+        ) : (
+          <main className="homepage">
+            <div className="loader"></div>
+            <div className="loader2"></div>
+          </main>
+        )}
       </section>
       <SongBar></SongBar>
       <audio ref={audioRef} src={track.src} preload="auto"></audio>
