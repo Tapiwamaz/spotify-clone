@@ -87,52 +87,10 @@
   transition: all 1ms ease-in-out;
   transform: none;
 }
-
-.cardHolder {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-  scroll-behavior: smooth;
-  gap: var(--sm);
-  padding-right: var(--xs);
+.a {
+  text-decoration: none;
 }
-.cardHolder::-webkit-scrollbar,
-.cardHolder::-webkit-scrollbar-thumb,
-.cardHolder::-webkit-scrollbar-thumb {
-  background-color: var(--dark);
-  height: 0;
-}
-.album {
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  padding: 6px 10px;
-  min-width: 170px;
-  min-height: 250px;
-  border-radius: var(--xs);
-}
-.songCard {
-  cursor: pointer;
-}
-.album:hover {
-  background-color: var(--darkLight);
+.a:visited {
+  color: var(--dark);
 }
 
-.albumPic {
-  width: 150px;
-  height: 150px;
-  border-radius: 9px;
-}
-.albumTitle {
-  font-size: 0.95rem;
-  margin: 1px 0;
-}
-.albumDesc {
-  font-weight: normal;
-  text-align: left;
-  font-size: 10.5px;
-  line-height: 13px;
-}
-
-.inactive {
-  background-color: var(--darkLight);
-}

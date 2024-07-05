@@ -8,6 +8,8 @@ import {
   formatTime,
   loadMp3s,
   setLocalStorage,
+  createAlbumsArray,
+  createQueue,
 } from "../helpers/helpers";
 
 export const PlayerContext = createContext();
@@ -23,6 +25,10 @@ const PlayerContextProvider = (props) => {
   const [playingStatus, setPlayingStatus] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
+  const [queue, setQueue] = useState([]);
+  const [queuePosition, setQueuePosition] = useState(0);
+
+  const [albums, setAlbums] = useState({});
 
   const [time, setTime] = useState({
     currentTime: {
@@ -38,6 +44,8 @@ const PlayerContextProvider = (props) => {
   useEffect(() => {
     const localStorageSongs = fetchStorage({ key: "ALL_Songs" });
 
+    // does the searc in the local folder to find and preprocess mp3 files
+    // with their metadata and also create genre and albums objects
     const fetchMp3s = async () => {
       try {
         const mp3Data = await loadMp3s();
@@ -51,29 +59,71 @@ const PlayerContextProvider = (props) => {
           }
           return 0;
         });
+
+        mp3Data.map((item, index) => {
+          item["index"] = index;
+        });
+
         if (!localStorageSongs) {
           setTrack(mp3Data[0]);
+          setTime({
+            currentTime: {
+              second: formatTime(0),
+              minute: formatTime(0),
+            },
+            totalTime: {
+              second: formatTime(Math.floor(mp3Data[0].duration % 60)),
+              minute: formatTime(Math.floor(mp3Data[0].duration / 60)),
+            },
+          });
+
           setAllSongs(mp3Data);
+          setAlbums(createAlbumsArray(mp3Data));
+          setLocalStorage({ key: "ALL_Songs", value: mp3Data });
+          setQueue(createQueue(mp3Data));
+          setQueuePosition(0);
         } else if (
           localStorageSongs &&
           localStorageSongs.length < mp3Data.length
         ) {
           setAllSongs(mp3Data);
+          setLocalStorage({ key: "ALL_Songs", value: mp3Data });
+          setAlbums(createAlbumsArray(mp3Data));
         }
         setFirstLoad(true);
       } catch (error) {
         console.error("Error loading MP3s:", error);
       }
     };
+
     if (!firstLoad) {
       if (localStorageSongs) {
         setAllSongs(localStorageSongs);
-        setTrack(localStorageSongs[localStorageSongs.length - 2]);
+        setTrack(localStorageSongs[0]);
+        setQueue(createQueue(localStorageSongs));
+        setQueuePosition(0);
+        setTime({
+          currentTime: {
+            second: formatTime(0),
+            minute: formatTime(0),
+          },
+          totalTime: {
+            second: formatTime(Math.floor(localStorageSongs[0].duration % 60)),
+            minute: formatTime(Math.floor(localStorageSongs[0].duration / 60)),
+          },
+        });
         setFirstLoad(true);
+        setAlbums(createAlbumsArray(localStorageSongs));
+
         fetchMp3s();
       } else {
         fetchMp3s();
       }
+    }
+    if (audioRef.current) {
+      audioRef.current.onended = () => {
+        setPlayingStatus(false);
+      };
     }
 
     setTimeout(() => {
@@ -98,43 +148,67 @@ const PlayerContextProvider = (props) => {
   const play = () => {
     audioRef.current.play();
     setPlayingStatus(true);
+    console.log("Queue: ", queue )
+    console.log("QueuePos: ", queuePosition )
   };
 
   const pause = () => {
     audioRef.current.pause();
-    console.log("Paused\n", audioRef.current.currentTime);
-    console.log(audioRef.current.duration);
     setPlayingStatus(false);
   };
 
   const next = async () => {
-    const index = allSongs.indexOf(track);
+    if (queue.length === 0) {
+      return;
+    }
+    if (queue.length === 1) {
+      audioRef.current.currentTime = 0;
+      await play();
+      return;
+    }
+
     if (repeat) {
       audioRef.current.currentTime = 0;
       await play();
       return;
     }
-    if (shuffle) {
-      const nextIndex = Math.round(Math.random() * (allSongs.length - 1));
-      await setTrack(allSongs[nextIndex]);
-      await play();
-      return;
+
+    let nextIndex = queuePosition + 1;
+    if (nextIndex >= queue.length) {
+      nextIndex = 0;
     }
-    if (index < allSongs.length - 1) {
-      await setTrack(allSongs[index + 1]);
-      await play();
-      return;
-    }
+    await setQueuePosition(nextIndex)
+    await setTrack(allSongs[queue[nextIndex]]);
+    await play();
+    return;
+
   };
   const previous = async () => {
-    const index = allSongs.indexOf(track);
-    if (index > 0) {
-      await setTrack(allSongs[index - 1]);
+    if (queuePosition > 0) {
+      let nextIndex = queuePosition-1
+      await setTrack(allSongs[queue[nextIndex]]);
+      await setQueuePosition(nextIndex)
       await play();
+    }
+    else {
+      audioRef.current.currentTime = 0;
+      await play();
+      return;
     }
   };
 
   const playWithID = async (id) => {
+    await setQueue(createQueue(allSongs))
+    function getIndex(element) {
+      return element === id;
+    }
+    const index = queue.findIndex(getIndex) 
+    await setQueuePosition(index);
+    await setTrack(allSongs[id]);
+    await play();
+  };
+
+  const playWithIDAlbum = async (id) => {
     await setTrack(allSongs[id]);
     await play();
   };
@@ -148,9 +222,14 @@ const PlayerContextProvider = (props) => {
     time,
     playingStatus,
     allSongs,
+    albums,
     shuffle,
     repeat,
+    queue,
+    queuePosition,
     setTrack,
+    setQueue,
+    setQueuePosition,
     setTime,
     setPlayingStatus,
     play,
@@ -160,6 +239,7 @@ const PlayerContextProvider = (props) => {
     playWithID,
     setRepeat,
     setShuffle,
+    playWithIDAlbum
   };
 
   return (

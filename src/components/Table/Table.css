@@ -1,0 +1,37 @@
+.table {
+  /* border: 1px solid white; */
+  color: var(--text);
+  background-color: var(--darkLightdark);
+}
+
+th,
+td {
+  height: 60px;
+}
+
+.headerColumn {
+  text-align: left;
+}
+
+.trackNumberHeader,
+.trackNumber {
+  width: 5%;
+  text-align: center;
+}
+
+.tableRow {
+    min-height: 50px;
+    cursor: pointer;
+}
+.tableRow:hover {
+    background: rgba(47, 47, 47, .4);
+}
+
+.trackDurationHeader,
+.trackDuration {
+    text-align: right;
+    padding-right: var(--xs);
+}
+.trackTitleHeader {
+  width: 35%;
+}

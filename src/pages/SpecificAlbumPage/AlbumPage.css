@@ -1,0 +1,79 @@
+.albumPage {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--darkLightdark);
+    max-width: 71vw;
+    max-height: 85vh;
+    min-height: 85vh;
+    min-width: 71vw;
+    margin: var(--xs) var(--xs)  0  var(--xs);
+    border-radius: var(--xs) var(--xs) 0 0;
+    overflow-y: auto;
+}
+
+.albumPage::-webkit-scrollbar-thumb,
+.albumPage::-webkit-scrollbar-track,
+.albumPage::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+.topAlbumPageSection {
+    display: flex;
+    min-height: 40vh;
+    max-height: 40vh;
+    margin: 0;
+    border-radius: inherit;
+    align-items: flex-end;
+}
+
+.topAlbumPageSection > * {
+    margin: 0 var(--xs) ;
+}
+
+.albumImage {
+    width :200px;
+    height :200px;
+    margin-bottom: var(--xs);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.rightAlbumPageSection {
+    display: flex;
+    flex-direction: column;
+    flex :1;
+    color: white;
+    margin: 0 0 var(--xs) 0 ;
+    justify-content: flex-end;
+
+}
+
+.rightAlbumPageSection > h5 {
+    font-size: var(--xs);
+}
+
+.albumName {
+    font-size: var(--xl);
+    margin: var(--xs) 0;
+}
+
+.infoLine {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    font-size: var(--xs);
+}
+
+.bottomAlbumPage {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: transparent;
+}
+
+.controlsAlbumPage {
+    border: 1px solid white;
+    height: 11vh;
+    display: flex;
+}

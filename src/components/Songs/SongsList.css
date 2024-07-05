@@ -1,4 +1,4 @@
-.cardHolderAlbums {
+.cardHolderSongs {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
     scroll-behavior: smooth;
@@ -23,15 +23,6 @@
   .songCard {
     cursor: pointer;
   }
-  .albumLink {
-    text-decoration: none;
-    color: inherit;
-    transition: all 100ms ease-in-out;
-  }
-  .albumLink:hover {
-    color: var(--text);
-  }
-
   .album:hover {
     background-color: var(--darkLight);
   }

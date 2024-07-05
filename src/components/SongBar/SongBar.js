@@ -22,6 +22,7 @@ import { useContext } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 //icons
 import { PauseCircleIcon } from "@heroicons/react/24/solid";
+import { shuffleQueue, sortQueue } from "../../helpers/helpers";
 
 const SongBar = () => {
   const {
@@ -38,6 +39,8 @@ const SongBar = () => {
     setRepeat,
     setShuffle,
     shuffle,
+    setQueue,
+    setQueuePosition,
   } = useContext(PlayerContext);
 
   return (
@@ -62,7 +65,15 @@ const SongBar = () => {
         <section className="modifiers">
           <svg
             className={`icon ${shuffle ? "green" : ""}`}
-            onClick={() => setShuffle((s) => !s)}
+            onClick={() => {
+              setQueue((q) => {
+                if (!shuffle) return shuffleQueue(q);
+                else return sortQueue(q);
+              });
+
+              setQueuePosition((x) => 0);
+              setShuffle((s) => !s);
+            }}
           >
             <ShuffleIcon />
           </svg>
@@ -81,9 +92,9 @@ const SongBar = () => {
           <svg className="icon" onClick={next}>
             <NextIcon />
           </svg>
-          <svg 
-          className={`icon ${repeat ? "green" : ""}`}
-          onClick={() => setRepeat(r => !r)}
+          <svg
+            className={`icon ${repeat ? "green" : ""}`}
+            onClick={() => setRepeat((r) => !r)}
           >
             <RepeatIcon />
           </svg>

@@ -11,7 +11,7 @@ import {
   InstallIcon,
 } from "../../assets/icons/icons";
 //router
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 //react
 import { useContext, useReducer } from "react";
 //context
@@ -31,7 +31,7 @@ function reducer(state, action) {
 }
 
 const Home = () => {
-  const { allSongs, playWithID, firstLoad } = useContext(PlayerContext);
+  const { firstLoad } = useContext(PlayerContext);
 
   const [state, dispatch] = useReducer(reducer, {
     songs: true,
@@ -61,8 +61,9 @@ const Home = () => {
           </section>
         </nav>
         <nav className="pageNav">
-          <button
-            className="button"
+          <NavLink
+            to={"/home"}
+            className="button a"
             onClick={() => dispatch({ type: "songs" })}
             style={{
               backgroundColor: !state.songs && "inherit",
@@ -70,9 +71,10 @@ const Home = () => {
             }}
           >
             Songs
-          </button>
-          <button
-            className="button"
+          </NavLink>
+          <NavLink
+            to={"/home/albums"}
+            className="button a"
             style={{
               backgroundColor: !state.albums && "inherit",
               color: !state.albums && "var(--text)",
@@ -80,9 +82,10 @@ const Home = () => {
             onClick={() => dispatch({ type: "albums" })}
           >
             Albums
-          </button>
-          <button
-            className="button"
+          </NavLink>
+          <NavLink
+            to={"/home/genres"}
+            className="button a"
             style={{
               backgroundColor: !state.genres && "inherit",
               color: !state.genres && "var(--text)",
@@ -90,23 +93,9 @@ const Home = () => {
             onClick={() => dispatch({ type: "genres" })}
           >
             Genres
-          </button>
+          </NavLink>
         </nav>
-        <h2 className="subTitle">Songs</h2>
-        <section className="cardHolder">
-          {allSongs.map((item, i) => {
-            return (
-              <article key={i} className="album songCard" onClick={() => playWithID(i)}>
-                <img
-                  className="albumPic"
-                  src={item.albumArtUrl ? item.albumArtUrl : StockPicture}
-                />
-                <h4 className="albumTitle">{item.title}</h4>
-                <h5 className="albumDesc">{item.artist}</h5>
-              </article>
-            );
-          })}
-        </section>
+        <Outlet />
       </main>
     );
   } else {
