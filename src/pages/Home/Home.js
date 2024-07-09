@@ -1,30 +1,22 @@
 //css
 import "./Home.css";
-//images
-import { pictures } from "../../assets/pictures";
-import StockPicture from "../../assets/StockMusic.jpg";
-//icons
-import {
-  BackPageIcon,
-  NextPageIcon,
-  BellIcon,
-  InstallIcon,
-} from "../../assets/icons/icons";
 //router
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet , useLocation} from "react-router-dom";
 //react
 import { useContext, useReducer } from "react";
 //context
 import { PlayerContext } from "../../context/PlayerContext";
+//components
+import Navbar from "../../components/NavBar/Navbar";
 
 function reducer(state, action) {
   switch (action.type) {
     case "songs":
-      return { songs: true, albums: false, genres: false };
+      return { songs: true, albums: false, artists: false };
     case "albums":
-      return { songs: false, albums: true, genres: false };
-    case "genres":
-      return { songs: false, albums: false, genres: true };
+      return { songs: false, albums: true, artists: false };
+    case "artists":
+      return { songs: false, albums: false, artists: true };
     default:
       return state;
   }
@@ -32,67 +24,56 @@ function reducer(state, action) {
 
 const Home = () => {
   const { firstLoad } = useContext(PlayerContext);
+  const location = useLocation();
 
   const [state, dispatch] = useReducer(reducer, {
-    songs: true,
-    genres: false,
-    albums: false,
+    songs: location.pathname === "/",
+    artists: location.pathname === "/artists",
+    albums: location.pathname === "/albums",
   });
 
   if (firstLoad) {
     return (
       <main className="homepage">
-        <nav className="topNav">
-          <section className="pageNavigationButtons">
-            <NavLink>
-              <BackPageIcon />
-            </NavLink>
-            <NavLink>
-              <NextPageIcon />
-            </NavLink>
-          </section>
-          <section className="otherButtons">
-            <button className="button">
-              <BellIcon />
-            </button>
-            <button className="button">
-              <InstallIcon />
-            </button>
-          </section>
-        </nav>
+        
+        <Navbar type="normal"/>
+
         <nav className="pageNav">
           <NavLink
-            to={"/home"}
-            className="button a"
+            to={"/"}
+            className="btn"
             onClick={() => dispatch({ type: "songs" })}
             style={{
               backgroundColor: !state.songs && "inherit",
-              color: !state.songs && "var(--text)",
+              color:  state.songs && "var(--text)",
+              outlineColor: state.songs && "var(--text)",
             }}
           >
             Songs
           </NavLink>
           <NavLink
-            to={"/home/albums"}
-            className="button a"
+            to={"/albums"}
+            className="btn"
             style={{
               backgroundColor: !state.albums && "inherit",
-              color: !state.albums && "var(--text)",
+              color:  state.albums && "var(--text)",
+              outlineColor: state.albums && "var(--text)",
             }}
             onClick={() => dispatch({ type: "albums" })}
           >
             Albums
           </NavLink>
           <NavLink
-            to={"/home/genres"}
-            className="button a"
+            to={"/artists"}
+            className="btn"
             style={{
-              backgroundColor: !state.genres && "inherit",
-              color: !state.genres && "var(--text)",
+              backgroundColor: !state.artists && "inherit",
+              color:  state.artists && "var(--text)",
+              outlineColor: state.artists && "var(--text)",
             }}
-            onClick={() => dispatch({ type: "genres" })}
+            onClick={() => dispatch({ type: "artists" })}
           >
-            Genres
+            Artists
           </NavLink>
         </nav>
         <Outlet />

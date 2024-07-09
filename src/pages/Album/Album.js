@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 //assets
 import StockPicture from "../../assets/StockMusic.jpg" 
-import { redirect } from "react-router";
+//rrd
 import { NavLink } from "react-router-dom";
 
 

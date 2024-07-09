@@ -1,5 +1,5 @@
 //router
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 //css
 import "./RootLayout.css";
 //components
@@ -10,8 +10,10 @@ import { useContext } from "react";
 //context
 import { PlayerContext } from "../context/PlayerContext";
 
+
 const RootLayout = () => {
-  const { audioRef, track, firstLoad } = useContext(PlayerContext);
+  const { audioRef, track, firstLoad  } = useContext(PlayerContext);
+
 
   return (
     <main className="rootLayout">

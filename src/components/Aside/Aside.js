@@ -21,8 +21,8 @@ const Aside = () => {
   return (
     <aside className="aside">
       <nav className="nav">
-        <NavLink className="navButton" to="/home"  >
-          {location.pathname === "/home" ?  <HomeIcon className="icon" /> : <HomeOutlineIcon className="icon" />}
+        <NavLink className="navButton" to="/"  >
+          {location.pathname === "/" ?  <HomeIcon className="icon" /> : <HomeOutlineIcon className="icon" />}
           <h3 className="linkText">Home</h3>
         </NavLink>
         <NavLink className="navButton" to="/search">
@@ -46,7 +46,6 @@ const Aside = () => {
           </ul>
         </nav>
         <NoPlaylist />
-        <NoPodcast />
       </section>
     </aside>
   );

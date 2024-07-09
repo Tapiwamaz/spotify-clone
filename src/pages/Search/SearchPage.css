@@ -5,10 +5,9 @@
   min-height: 85vh;
   min-width: 71vw;
   margin: var(--xs);
-
   margin-bottom: 0;
   position: relative;
-
+  overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--darkLightdark);
 }
@@ -18,96 +17,15 @@
   width: 10px;
 }
 
-.topNav {
-  display: flex;
-  justify-content: space-between;
-  height: min-content;
-  /* border: 1px solid sandybrown; */
-  padding: 0 var(--sm);
-  position: relative;
-}
-
-.topNav section {
-  display: flex;
-  padding: 0;
-  justify-content: center;
-  align-items: center;
-  gap: var(--xs);
-}
-.topNav a {
-  display: flex;
-  width: 40px;
-  height: 40px;
-  color: var(--text);
-  border-radius: 50%;
-  background-color: var(--dark);
-  align-items: center;
-  justify-content: center;
-}
-
-.topNav section a > svg {
-  display: flex;
-  margin: 0;
-}
-.topNav section button {
-  display: flex;
-  padding: 0;
-  background-color: transparent;
-  color: var(--textInactive);
-  /* transition: all 1ms ease-in-out; */
-}
-.topNav section button > svg {
-  margin: 0;
-  background-color: var(--dark);
-  padding: 5px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: all 1ms ease-in-out;
-}
-
-.topNav section button > svg:hover {
-  color: var(--text);
-  transform: scale(1.1);
-}
-
 .searchPage > * {
-  margin: var(--xs);
+  margin:  0.4rem var(--xs) ;
 }
 
-.searchFieldHolder {
+.searchHolder {
   display: flex;
-  border: 2px solid var(--darkLight);
-  border-radius: var(--sm);
-}
-.searchFieldHolder:hover  {
-  color: var(--text);
-  outline: 2px solid var(--text);
-  background-color:  var(--darkLight);
-}
-.searchFieldHolder:hover > .searchInput {
-  background-color:  var(--darkLight);
-}
-.noMargin {
-  margin: 0;
-}
-.searchFieldHolder .icon {
-  margin: var(--xs)  0 var(--xs) var(--xs) ;
+  overflow-x: auto;
 }
 
-
-
-.searchInput {
-  border: none;
-  font: inherit;
-  padding: 0 var(--xs);
-  width: 25vw;
-  border-radius: inherit;
-  background-color: var(--darkLightdark);
-  color: var(--text);
+.searchPage .songCard {
+  transition: all 450ms ease-in-out;
 }
-.searchInput:focus {
-  border: none;
-  outline: none;
-}
-

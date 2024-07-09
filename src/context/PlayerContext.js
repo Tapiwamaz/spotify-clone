@@ -9,8 +9,10 @@ import {
   loadMp3s,
   setLocalStorage,
   createAlbumsArray,
+  createArtistsArray,
   createQueue,
 } from "../helpers/helpers";
+
 
 export const PlayerContext = createContext();
 
@@ -27,9 +29,8 @@ const PlayerContextProvider = (props) => {
   const [repeat, setRepeat] = useState(false);
   const [queue, setQueue] = useState([]);
   const [queuePosition, setQueuePosition] = useState(0);
-
   const [albums, setAlbums] = useState({});
-
+  const [artists, setArtists] = useState({});
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -40,6 +41,7 @@ const PlayerContextProvider = (props) => {
       minute: 0,
     },
   });
+
 
   useEffect(() => {
     const localStorageSongs = fetchStorage({ key: "ALL_Songs" });
@@ -61,7 +63,7 @@ const PlayerContextProvider = (props) => {
         });
 
         mp3Data.map((item, index) => {
-          item["index"] = index;
+          return item["index"] = index;
         });
 
         if (!localStorageSongs) {
@@ -79,6 +81,7 @@ const PlayerContextProvider = (props) => {
 
           setAllSongs(mp3Data);
           setAlbums(createAlbumsArray(mp3Data));
+          setArtists(createArtistsArray(mp3Data))
           setLocalStorage({ key: "ALL_Songs", value: mp3Data });
           setQueue(createQueue(mp3Data));
           setQueuePosition(0);
@@ -89,6 +92,8 @@ const PlayerContextProvider = (props) => {
           setAllSongs(mp3Data);
           setLocalStorage({ key: "ALL_Songs", value: mp3Data });
           setAlbums(createAlbumsArray(mp3Data));
+          setArtists(createArtistsArray(mp3Data))
+
         }
         setFirstLoad(true);
       } catch (error) {
@@ -114,6 +119,8 @@ const PlayerContextProvider = (props) => {
         });
         setFirstLoad(true);
         setAlbums(createAlbumsArray(localStorageSongs));
+        setArtists(createArtistsArray(localStorageSongs))
+
 
         fetchMp3s();
       } else {
@@ -127,6 +134,9 @@ const PlayerContextProvider = (props) => {
     }
 
     setTimeout(() => {
+      audioRef.current.onended = () => {
+        next();
+      }
       audioRef.current.ontimeupdate = () => {
         seekBar.current.style.width =
           (audioRef.current.currentTime / audioRef.current.duration) * 100 +
@@ -158,6 +168,7 @@ const PlayerContextProvider = (props) => {
   };
 
   const next = async () => {
+    console.log(queue);
     if (queue.length === 0) {
       return;
     }
@@ -213,6 +224,9 @@ const PlayerContextProvider = (props) => {
     await play();
   };
 
+    
+
+
   const contextValue = {
     audioRef,
     seekBg,
@@ -227,6 +241,8 @@ const PlayerContextProvider = (props) => {
     repeat,
     queue,
     queuePosition,
+    artists,
+    setArtists,
     setTrack,
     setQueue,
     setQueuePosition,
@@ -239,7 +255,7 @@ const PlayerContextProvider = (props) => {
     playWithID,
     setRepeat,
     setShuffle,
-    playWithIDAlbum
+    playWithIDAlbum,
   };
 
   return (

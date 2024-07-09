@@ -6,7 +6,7 @@ function importAll(r) {
   return files;
 }
 
-const mp3s = importAll(require.context("/Users/mazar/Music", false, /\.mp3$/));
+const mp3s = importAll(require.context("/Users/mazar/Music", true, /\.mp3$/));
 
 const getMp3Metadata = (fileUrl) => {
   return new Promise((resolve, reject) => {
@@ -108,11 +108,43 @@ const createAlbumsArray = (allSongs) => {
   return albums;
 };
 
+const createArtistsArray = (allSongs) => {
+  const artists = {};
+  for (const index in allSongs) {
+    const song = allSongs[index];
+    if (artists[`${song.artist}`]) {
+      artists[`${song.artist}`].songs = [...artists[`${song.artist}`].songs, song]
+      artists[`${song.artist}`]["numberOfSongs"] = 1 + artists[`${song.artist}`]["numberOfSongs"];
+      artists[`${song.artist}`]["artistTotalTime"] =
+      artists[`${song.artist}`]["artistTotalTime"] + song.duration;
+    } else {
+      artists[`${song.artist}`] = { songs: [] };
+      artists[`${song.artist}`].songs = [song];
+      artists[`${song.artist}`]["artistTotalTime"] = song.duration;
+      artists[`${song.artist}`]["numberOfSongs"] = 1;
+    }
+    artists[`${song.artist}`]["artist"] = song.artist;
+    artists[`${song.artist}`]["albumArt"] = song.albumArtUrl;
+    artists[`${song.artist}`]["genre"] = song.genre;
+  }
+  Object.keys(artists).forEach((key) => {
+    if (artists[key].albumArt) {
+      getImageData(artists[key].albumArt)
+        .then((imageData) => {
+          const color = getAverageColor(imageData);
+          artists[key]["avgColor"] = color;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  });
+  return artists;
+};
+
 const createQueue = (songs) => {
   const queue = [];
-  songs.map((song, index) => {
-    queue.push(song.index);
-  });
+  songs.map((song, index) => queue.push(song.index));
   return queue;
 };
 
@@ -149,6 +181,7 @@ export {
   createAlbumsArray,
   formatDigitalTime,
   createQueue,
+  createArtistsArray,
   shuffleQueue,
   sortQueue,
 };
